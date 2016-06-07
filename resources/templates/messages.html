@@ -1,12 +1,14 @@
 <html>
 <body>
-<form action="/messages" method="post">
+<form action="/create-message" method="post">
     <input type="text" name="message" placeholder="Enter your message"/>
     <button type="submit">Submit</button>
     </form>
-Hello, {{name}}!<br><br>
+Hello, {{username}}!<br><br>
+<ol>
 {{#messages}}
-<li>{{message}}</li>
+<li>{{text}}</li>
 {{/messages}}
+    </ol>
 </body>
 </html>
