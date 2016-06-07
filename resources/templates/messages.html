@@ -4,7 +4,11 @@
     <input type="text" name="message" placeholder="Enter your message"/>
     <button type="submit">Submit</button>
     </form>
-Hello, {{username}}!<br><br>
+<form action="/delete-message" method="post">
+    <input type="number" name="id" placeholder="#"/>
+    <button type="submit">Delete Message</button>
+</form>
+Hello, {{name}}!<br><br>
 <ol>
 {{#messages}}
 <li>{{text}}</li>
