@@ -4,7 +4,6 @@ import spark.ModelAndView;
 import spark.Session;
 import spark.Spark;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import spark.template.mustache.MustacheTemplateEngine;
 
@@ -102,6 +101,29 @@ public class Main {
                     response.redirect("/");
                     return "";
                 }
+        );
+        Spark.post(
+                "/edit-message",
+                (request, response) -> {
+                    Session session = request.session();
+                    String name = session.attribute("name");
+                    if (name == null) {
+                        throw new Exception("not logged in");
+                    }
+                    int editId = Integer.valueOf(request.queryParams("edit-id"));
+                    User user = users.get(name);
+                    if (editId < 0 || editId - 1 >= user.messages.size() ) {
+                        throw new Exception("invalid id");
+                    }
+                    user.messages.remove(editId - 1);
+                    String message = request.queryParams("edit-message");
+                    Message m = new Message(message);
+                    user.messages.add(m);
+
+                    response.redirect("/");
+                    return "";
+                }
+
         );
     }
 }

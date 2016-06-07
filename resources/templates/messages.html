@@ -8,6 +8,11 @@
     <input type="number" name="id" placeholder="#"/>
     <button type="submit">Delete Message</button>
 </form>
+<form action="/edit-message" method="post">
+    <input type="number" name="edit-id" placeholder="#"/>
+    <input type="text"  name="edit-message" placeholder="Edit Message">
+    <button type="submit">Edit Message</button>
+</form>
 Hello, {{name}}!<br><br>
 <ol>
 {{#messages}}
