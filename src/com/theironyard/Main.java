@@ -26,6 +26,11 @@ public class Main {
                         User user = users.get(name);
                         m.put("password", user.password);
                         m.put("name", user.name);
+                        int id = 1;
+                        for (Message msg : user.messages){
+                            msg.id = id;
+                            id++;
+                        }
                         m.put("messages", user.messages);
                         return new ModelAndView(m, "messages.html");
                     }
@@ -115,10 +120,13 @@ public class Main {
                     if (editId < 0 || editId - 1 >= user.messages.size() ) {
                         throw new Exception("invalid id");
                     }
-                    user.messages.remove(editId - 1);
                     String message = request.queryParams("edit-message");
-                    Message m = new Message(message);
-                    user.messages.add(m);
+                    Message msg = user.messages.get(editId - 1);//re
+                    msg.text = message;                  //re
+                    //user.messages.remove(editId - 1);
+                    //String message = request.queryParams("edit-message");
+                    //Message m = new Message(message);
+                    //user.messages.add(m);
 
                     response.redirect("/");
                     return "";
